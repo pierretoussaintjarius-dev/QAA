@@ -1,0 +1,85 @@
+## Enjoy Jarius Pierre-Toussaint's 'Wave Particle Motion Predictor' that utilizes the Quadratic Array Algorithm to perform  negative quadratic equations
+#on an array of numeric data points. 
+# Github : @pierretoussaintjarius-dev
+#Jarius is a Certified Coursera Microsoft Data Analyst. 
+#This code is intended for ETHICAL applications and deployment. 
+#Warning, do not use Synthetic data as a total replacement for obtaining true data. 
+
+#-----------Math
+import numpy as np
+import random as rnd
+import pandas as pd
+#---------------Visualization--------------------
+import matplotlib.pyplot as plt
+#-----------Linear Model Predictions----------------------
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.model_selection import train_test_split
+
+#-----------------------------Main----------------------------
+
+trial_counter = list(range(2)) # How many times will you like to run the 'Synthetic Partical Wave Generator" ?
+
+for x in trial_counter:
+    numbers2 = list(range(200)) #Time/Distance (Longitudinal Data Index. Allows us to find Time-Series based insights) 
+    hit = [-x ** np.pi * rnd.uniform(np.pi,np.pi**2) for x in numbers2] # Quadratic Formula. Movement of Volume ? / Physics? / Feed to Machine Learning Model? Random Range of Pi #Weight of each item. Volume of each Frequency blare. Wave Particle displacement.
+    print(f'---------------------Test # :{x+1} --------------------------')
+    plt.scatter(numbers2[0:200:2],hit[0:200:2],c='r') # Plot your data.
+    plt.plot(hit[0:200])
+    plt.show()
+    plt.scatter(numbers2[0:200],hit[0:200])
+    plt.show()
+
+#-----------------------Evaluate our Synthetic Data Metrics-----------------------------------------------------
+cluster = {'Normal Position' : numbers2,'Movement': hit}
+print(pd.DataFrame(cluster))
+
+X = pd.DataFrame(cluster['Normal Position'])
+y = cluster['Movement']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+y_pred = regressor.predict(X_test) #Y_Pred now holds all the predictions of possible particle movement after a certain passing of time/distance.
+
+#------------Visualize said data and locate any insights by plotting with calc transformations (Sin, Cos, Tan).
+plt.scatter(X_test,y_pred,c='b', label='Linear Prediction')
+plt.scatter(X_test,y_test,c='r',label= 'Actual')
+plt.scatter(X_test,np.cos(y_pred),c='g',label= 'Maximum Force Prediction') #First Intersection with prediction and test. However, y remains flattend by cos. cos is better for threshold ratios..Sigmoid.
+plt.scatter(np.sin(X_test),y_pred,c='white',label= 'Maximum Decay Prediction')
+plt.scatter(np.tan(X_test),np.tan(y_pred),c='y',label= 'Probable Force Origin/Concentration')
+plt.title('Quadratic Array Algorithm and Linear Regression')
+plt.xlabel('Time/Distance')
+plt.ylabel('Decay')
+plt.legend()
+plt.show()
+
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+rmae = np.sqrt(mean_absolute_error(y_test, y_pred))
+print(f'rmae :{rmae}')
+print(f'mse :{mse}')
+print(f'mae :{mae}')"
+
+#--------------------Box Plot Visualization. Show change of concentration location over time. 
+cluster_move = []
+cluster_norm = []
+
+for x in range(0,100):
+    cluster_move.append(cluster['Movement'][x])
+    cluster_norm.append(cluster['Normal Position'][x])
+
+plt.boxplot(cluster_move,label='Highest Point of Concentration Start')
+plt.legend()
+plt.show()
+
+for x in range(100,200):
+    cluster_move.append(cluster['Movement'][x])
+    cluster_norm.append(cluster['Normal Position'][x])
+
+plt.boxplot(cluster_move,label='Highest Points of Concentration End')
+plt.legend()
+plt.show()
+
