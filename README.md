@@ -1,15 +1,18 @@
 # QAA
 #Build, research, and explore the applications of our "Quadratic Array Algorithm." We utilize Pandas, Numpy, and SciKitLearn to apply quadratic formula #multiplications to every specified value or variable within a data set.  
 
-#Libraries 
+#Libraries
+
 import Python
 import pandas as pd
 Import numpy as np
 import random as rnd
+
 ------------------------------------------------
 #Data,Glitch,Dump
 
 #data = Input data list of integers. For now we will use:
+
 ---------------------------------------
 data = list(rnd.randint(0,5)# or range of numbers preferred.
 
